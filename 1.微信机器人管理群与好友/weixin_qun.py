@@ -43,11 +43,15 @@ def start_care():
     while (True):
         print("微信群管理正常，时间：" + time.strftime("%Y-%m-%d %H:%M:%S"))
 
-        # new_time = time.ctime()[-13, -8]
-
         now_time = time.ctime()[-13:-8]
         if (now_time == qun_notice_time):
             send_message(qun_notice_info)
+
+        now_time_minute = now_time[-2:]
+
+        # 每小时发送信息到文件传输助手，方便监控运行状态
+        if(now_time_minute == "16"):
+            bot.file_helper.send("微信机器人运行正常~")
 
         # 每60秒检测一次
         time.sleep(60)
@@ -69,7 +73,7 @@ if __name__ == "__main__":
         # bot = Bot()     # 启动微信机器人
         bot = Bot(cache_path=True)      # 保存缓存，保持登录状态，方便测试
         # embed()  # 进入 Python 命令行
-        # 发送信息到微信助手，测试是否启动成功
+        # 发送信息到文件传输助手，测试是否启动成功
         bot.file_helper.send("微信机器人启动成功！!" + time.strftime("%Y-%m-%d %H:%M:%S"))
     elif('Darwin' in system()):
         # MacOSX
