@@ -1,5 +1,8 @@
-# 微薄利抢购
-# 完善思路：多线程同时抢购多个商品
+# 完善思路：
+# 1、多线程同时抢购多个商品
+# 2、设置抢购时时间自动抢购（提前十秒钟自动抢购，已经抢到、或者超过十秒停止抢购）
+# 3、抢购成功发送消息提醒（微信或者邮箱）
+
 
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -42,20 +45,21 @@ class vboly_class:
 
         # 自适应等待，获取状态
         self.browser.implicitly_wait(30)
-        while (self.browser.find_element_by_id('bugstate').text != '填写订单号'):
-            time.sleep(0.1)
-            self.browser.refresh()  # 刷新页面
 
-            # # 自适应等待，点击抢购按钮
+        while (self.browser.find_element_by_id('bugstate').text != '填写订单号'):
+            time.sleep(0.2)
+            self.browser.refresh()  # 刷新页面
+            # 自适应等待，点击抢购按钮
             self.browser.implicitly_wait(30)
-            self.browser.find_element_by_id('bugstate').click()
+            if (self.browser.find_element_by_id('bugstate').text == '我要抢购'):
+                self.browser.find_element_by_id('bugstate').click()
 
 
 
 if __name__ == '__main__':
 
     # 抢购地址
-    buy_url = "http://ls.vboly.com/web/vblgoods/info/goodsid/348422.htm"
+    buy_url = "http://ls.vboly.com/web/vblgoods/info/goodsid/413054.htm"
 
     chromedriver_path = "C:/Users/He/AppData/Local/Google/Chrome/Application/chromedriver.exe"  # 改成你的chromedriver的完整路径地址
     vboly_username = "17600296522"  # 改成你的微薄利账号
