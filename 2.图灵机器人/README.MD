@@ -23,9 +23,6 @@ my_friend_name = Alex
 # 注意：没有的话，把名字注释掉
 my_qun_name = 机器人测试群
 
-# 机器人名称
-robot_name = 机器人
-
 # 图灵api_key
 # 图灵机器人官网注册获取apikey。地址：http: // www.tuling123.com /
 tuling_api_key = 5279ee06a58b4db8880fa6c44949b33c
@@ -62,7 +59,7 @@ my_girl_group = bot.groups().search(my_qun_name)[0]
 @bot.register(chats=my_girl_group, except_self=False)
 def reply_my_group(msg):
     # 需要@机器人
-    if (robot_name in msg.text):
+    if msg.is_at:
         tuling = Tuling(api_key=tuling_api_key)  # ***填你的图灵api_key
         tuling.do_reply(msg)
 ```
@@ -74,6 +71,19 @@ my_girl_friend = bot.friends().search(my_friend_name)[0]
 def reply_my_friend(msg):
     tuling = Tuling(api_key=tuling_api_key)  # ***填你的图灵api_key
     tuling.do_reply(msg)
+```
+
+3、发送所有的群或好友
+```python
+@bot.register()
+def auto_reply(msg):
+
+    # 如果是微信群的话，需要@机器人，好友不需要
+    if isinstance(msg.chat, Group) and not msg.is_at:
+        return
+    else:
+        tuling = Tuling(api_key=tuling_api_key)  # ***填你的图灵api_key
+        tuling.do_reply(msg)
 ```
 
 当然仅仅写以上内容，会导致你的程序主程序运行结束自然退出。  
