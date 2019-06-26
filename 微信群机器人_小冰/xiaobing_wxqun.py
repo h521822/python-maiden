@@ -48,7 +48,8 @@ if __name__ == "__main__":
     # 群名称
     my_group_name = cf.get("configuration", "my_group_name")
     # 菜单
-    menu = cf.get("configuration", "menu")
+    # menu = cf.get("configuration", "menu")
+    menu = "===功能主菜单===\n* 成语接龙  * 你画我猜"
 
     # 公众号
     my_mp = bot.mps().search(my_mp_name)[0]
