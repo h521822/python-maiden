@@ -73,7 +73,7 @@ def reply_my_friend(msg):
     tuling.do_reply(msg)
 ```
 
-3、发送所有的群或好友
+3. 发送所有的群或好友
 ```python
 @bot.register()
 def auto_reply(msg):
