@@ -102,6 +102,9 @@ if __name__ == '__main__':
     filename = cf.read("configs.ini", encoding='UTF-8')
     # print(filename)
 
+
+    # 好友名称
+    my_friend_name = cf.get("configuration", "my_friend_name")
     # 群名称
     my_qun_name = cf.get("configuration", "my_qun_name")
     # 发送群公告时间
@@ -130,6 +133,13 @@ def reply_my_group(msg):
         else:
             tuling = Tuling(api_key=tuling_api_key)  # ***填你的图灵api_key
             tuling.do_reply(msg)
+
+# 微信好友（发送指定的好友）
+my_girl_friend = bot.friends().search(my_friend_name)[0]
+@bot.register(chats=my_girl_friend)
+def reply_my_friend(msg):
+    tuling = Tuling(api_key=tuling_api_key)  # ***填你的图灵api_key
+    tuling.do_reply(msg)
 
 
 embed()
