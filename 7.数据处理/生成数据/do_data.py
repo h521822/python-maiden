@@ -6,6 +6,10 @@
 # @File     : __init__.py.py
 # @Software : PyCharm
 
+# 工作中的小应用
+# 生成大量一定规则的数据
+
+
 import time
 import datetime
 
