@@ -1,0 +1,11 @@
+
+       futTransaction.dealDate,
+        futTransaction.isConfirmFlag,
+        futTransaction.notifier,
+				 notifierStaff.staffName as notifiername,
+        futTransaction.approvalStatus,
+        ddApprovalBusiness.approvalGroup || approvalStatusDict.dictItemName as approvalstatusname,
+        futTransaction.category,
+        categoryDict.dictItemName as categoryName,
+        futTransaction. checkStatus,
+ 
