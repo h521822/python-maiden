@@ -72,11 +72,33 @@ class v_infos:
 
 
 
-        # submit = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '#maingridgrid > div.l-grid2')))
+        submit = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '#maingridgrid > div.l-grid2')))
+
+        # self.browser.find_element_by_xpath('//*[@id="maingrid|2|r1001|c109"]/div/button').click()
+        # self.browser.find_element_by_xpath('//*[@id="maingrid|2|r1003|c109"]/div/button[2]').click()            # 能用
+        # self.browser.find_element_by_xpath('//*[@id="maingrid|2|r1003|c109"]/div/button[@value="晒实物"]').click()
+
+        # print(self.browser.find_element_by_xpath('//*[@id="maingrid|2|r1003|c109"]/div/button[2]').get_attribute('textContent'))    # 晒实物
+
+        print(self.browser.find_elements_by_xpath('//*[@id="maingrid|2|r1003|c109"]/div/button'))
+
+
+
+
 
 
         # self.browser.switch_to.window(self.browser.window_handles[-1])
-        # submit = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '#maingrid|2|r1001|c109')))
+
+        # self.browser.find_element_by_id('#maingrid|2|r1003|c109 > div > button:nth-child(2)').click()
+
+        
+
+        
+
+
+        # self.browser.switch_to.window(self.browser.window_handles[-1])
+        # submit = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '#maingrid|2|r1003|c109')))
+        # maingrid|2|r1003|c109
 
 
 
