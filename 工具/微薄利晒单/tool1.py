@@ -1,4 +1,5 @@
 #coding=utf-8
+# 打开一个新的窗口，并访问新的地址
 
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -46,42 +47,29 @@ class v_infos:
 
         # 等待 登录按钮 出现
         self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '#login-but'))).click()
+        # print(self.browser.title)
 
 
         # 跳转到我的微薄利
         self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '#topbar > div > div.topbar1200-l > div.t-member-inof-container.topbar1200-l > a'))).click()
-
         # 将处理对象变为新标签页面，否则浏览器操作对象会找不到要操作页面中的元素
         self.browser.switch_to.window(self.browser.window_handles[-1])
+
+
+        # self.browser.get('http://www.baidu.com')
+        # self.browser.switch_to.window(self.browser.window_handles[-1])
+
         
-        # 跳转到我的订单
-        self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '#wrapper > div > div.m-sidebar > div.m-sidebar-box.mb10 > div:nth-child(1)'))).click()
+        # 新开一个窗口，通过执行js来新开一个窗口
+        # js='window.open("http://www.baidu.com");'
+        self.browser.execute_script('window.open("http://www.baidu.com");')
+        self.browser.switch_to.window(self.browser.window_handles[-1])
 
-        # 跳转到我的订单
-        self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '#wrapper > div > div.m-sidebar > div.m-sidebar-box.mb10 > div:nth-child(1) > ul > li:nth-child(1) > a'))).click()
 
 
-        # 未晒单评价
-        self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '#l > li:nth-child(5)'))).click()
 
-        stop = random.uniform(1, 5)
-        time.sleep(stop)
-        buttons = self.browser.find_elements_by_css_selector("[type=button]")
-        for b in buttons:
-            if (b.get_attribute('innerHTML') == '晒实物'):
-                b.click()
-
-                self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '.l-dialog-buttons-inner > div:nth-child(2) > div:nth-child(3)'))).click()
-
-                self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '#file_upload'))).click()
-
-                # 需上传图片的路径
-                file_path = "D:\\yongzhou.jpg"
-                # 执行autoit上传文件
-                os.system("D:\\22222211.exe %s" % file_path)  
-                break
-        self.browser.close()
-
+        # 关闭当前窗口
+        # self.browser.close()
 
 if __name__ == "__main__":
     # 浏览器驱动
