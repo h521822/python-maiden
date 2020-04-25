@@ -1,4 +1,5 @@
 # 将MyBatis中的问号，替换为实际参数
+# 类似idea的插件MyBatis Log Pligin
 
 import os
 
@@ -48,7 +49,8 @@ def openFile():
         cData = i
         break
       else:
-        sData += i.strip()     # 因为eclipse打印出来的log每一行会有个空格。。。
+        # sData += i.strip()     # 因为eclipse打印出来的log每一行会有个空格。。。
+        sData += i[:-1]     # 因为eclipse打印出来的log每一行会有个空格。。。
     doData(sData,cData)
 
 
