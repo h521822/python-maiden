@@ -71,6 +71,9 @@ class v_infos:
         # 关闭当前窗口
         # self.browser.close()
 
+        # 退出浏览器
+        # self.driver.quit()
+
 if __name__ == "__main__":
     # 浏览器驱动
     chromedriver_path = "D:/chrome/chromedriver.exe"

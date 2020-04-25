@@ -7,7 +7,24 @@ from selenium.webdriver.support import expected_conditions as EC
 import os
 import time
 import random
+import win32api, win32con  # 安装 pywin32或者pypiwin32
 
+
+VK_CODE ={'ctrl':0x11, 't':0x54, 'tab':0x09}
+
+# 键盘键按下
+def keyDown(keyName):
+    win32api.keybd_event(VK_CODE[keyName], 0, 0, 0)
+# 键盘键抬起
+def keyUp(keyName):
+    win32api.keybd_event(VK_CODE[keyName], 0, win32con.KEYEVENTF_KEYUP, 0)
+
+# 封装的按键方法
+def simulateKey(firstKey, secondKey):
+    keyDown(firstKey)
+    keyDown(secondKey)
+    keyUp(secondKey)
+    keyUp(firstKey)
 
 #定义一个wb类
 class v_infos:
@@ -64,6 +81,10 @@ class v_infos:
         # 未晒单评价
         self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '#l > li:nth-child(5)'))).click()
 
+        simulateKey("ctrl", "t")
+        self.browser.get('http://www.baidu.com')
+
+
         stop = random.uniform(1, 5)
         time.sleep(stop)
         buttons = self.browser.find_elements_by_css_selector("[type=button]")
@@ -80,7 +101,13 @@ class v_infos:
                 # 执行autoit上传文件
                 os.system("D:\\22222211.exe %s" % file_path)  
                 break
-        self.browser.close()
+        
+        # 关闭当前窗口
+        # self.browser.close()
+
+        # 退出浏览器
+        # self.driver.quit()
+        
 
 
 if __name__ == "__main__":
@@ -89,6 +116,9 @@ if __name__ == "__main__":
 
     v_username = "17600296522"
     v_password = "hj123456"
+
+    t_username = "17600296522"
+    t_password = "hj123456"
 
     v = v_infos()
     v.login()
