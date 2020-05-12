@@ -19,6 +19,8 @@ import numpy as np
 # 
 # 量化金融，用数据科学投资
 # 
+# 数据更新太慢，计划前20条数据从天天基金爬取
+# 
 #############################
 
 
@@ -185,7 +187,7 @@ def get_data(code):
             df.loc[d.index,'ypck'] = "清仓"
             # print(d['realNet'])
         # IF(AND(E4>M4,E4<G4,[@单位净值2]<[@高位止盈线]),"止盈赎回"
-        elif float(d1['realNet']) > float(d1['g2']) and float(d['realNet']) < float(d['gwvyx']):
+        elif float(d1['realNet']) > float(d1['gwvyx']) and float(d1['realNet']) < float(d1['g2']) and float(d['realNet']) < float(d['gwvyx']):
             df.loc[d.index,'ypck'] = "止盈赎回"
         # IF([@单位净值2]>[@低位加仓线],"观望期",
         elif float(d['realNet']) > float(d['dwjcx']):
@@ -197,23 +199,20 @@ def get_data(code):
             df.loc[d.index,'ypck'] = "探底加仓"
 
         
-    df.drop(['totalNet'],axis=1,inplace=True)
-    df.drop(['unitNet'],axis=1,inplace=True)
-    df.drop(['s1'],axis=1,inplace=True)
-    df.drop(['s2'],axis=1,inplace=True)
-    df.drop(['s3'],axis=1,inplace=True)
+    df.drop(['totalNet','unitNet','s1','s2','s3'],axis=1,inplace=True)
     # print(df)
     # 保存数据
     # df.to_csv('4444444444444.csv')
 
-    df = df[-50:]
+    # df = df[-50:]
     df[['realNet','g1','g2','g3','lnz','gwvyx','dwjcx']].plot()
     # matplotlib显示
     # plt.style.use('bmh')
-    plt.show()
+    # plt.show()
 
     df = df[-20:]
     print(df)
+    # df.to_csv('4444444444444.csv')
 
     
 
