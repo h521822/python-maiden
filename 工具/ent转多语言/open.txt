@@ -1,0 +1,31 @@
+/**
+	 * 品种ID
+	 */
+	@ApiModelProperty(value = "品种ID")
+	private String varietyId;
+	/**
+	 * 品种名称
+	 */
+	@ApiModelProperty(value = "品种名称")
+	private String varietyName;
+	/**
+	 * 合约
+	 */
+	@ApiModelProperty(value = "合约")
+	private String contractNo;
+
+	/**
+	 * 收盘价
+	 */
+	@ApiModelProperty(value = "收盘价")
+	private BigDecimal closePrice;
+	/**
+	 * 结算价
+	 */
+	@ApiModelProperty(value = "结算价")
+	private BigDecimal settlePrice;
+	/**
+	 * 更新时间
+	 */
+	@ApiModelProperty(value = "更新时间")
+	private Date updateTime;
