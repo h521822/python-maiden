@@ -1,0 +1,27 @@
+<!-- 交付批次信息 -->
+			<t:dgCol title="销售交付批次号" field="exSellDeliveryFullLotNo1" align="left" width="160"></t:dgCol>
+			<t:dgCol title="采购交付批次号" field="exBuyDeliveryFullLotNo" align="left" width="160"></t:dgCol>
+			<t:dgCol title="数量" field="exSellDeliveryQuantity" align="right" width="100" formatterjs="number6digits"></t:dgCol>
+			<!-- 现货信息 -->
+			<t:dgCol title="采购美元价格" field="buyUsPrice" align="right" width="100" formatterjs="number2digits"></t:dgCol>
+			<t:dgCol title="购汇汇率" field="exchangeRate" align="right" width="100" formatterjs="number2digits"></t:dgCol>
+			<t:dgCol title="采购人民币价格" field="buyCnPrice" align="right" width="100" formatterjs="number2digits"></t:dgCol>
+			<t:dgCol title="采购不含税货款" field="buyPayment" align="right" width="100" formatterjs="number2digits"></t:dgCol>
+			<t:dgCol title="销售价格" field="saleCnPrice" align="right" width="100" formatterjs="number2digits"></t:dgCol>
+			<t:dgCol title="销售不含税货款" field="salePayment" align="right" width="100" formatterjs="number2digits"></t:dgCol>
+			<t:dgCol title="资金成本" field="fundsCost" align="right" width="100" formatterjs="number2digits"></t:dgCol>
+			<t:dgCol title="暂估费用" field="estimateFee" align="right" width="100" formatterjs="number2digits"></t:dgCol>
+			<t:dgCol title="费用" field="fee" align="right" width="100" formatterjs="number2digits"></t:dgCol>
+			<t:dgCol title="现货盈亏" field="spotPnl" align="right" width="100" formatterjs="number2digits"></t:dgCol>
+			<!-- 期货信息 -->
+			<t:dgCol title="外盘买入" field="foreignBuyAmount" align="right" width="100" formatterjs="number2digits"></t:dgCol>
+			<t:dgCol title="外盘卖出" field="foreignSellAmount" align="right" width="100" formatterjs="number2digits"></t:dgCol>
+			<t:dgCol title="手续费" field="foreignCharges" align="right" width="100" formatterjs="number2digits"></t:dgCol>
+			<t:dgCol title="外盘盈亏" field="foreignPnl" align="right" width="100" formatterjs="number2digits"></t:dgCol>
+			<t:dgCol title="内盘买入" field="nativeBuyAmount" align="right" width="100" formatterjs="number2digits"></t:dgCol>
+			<t:dgCol title="内盘卖出" field="nativeSellAmount" align="right" width="100" formatterjs="number2digits"></t:dgCol>
+			<t:dgCol title="手续费" field="nativeCharges" align="right" width="100" formatterjs="number2digits"></t:dgCol>
+			<t:dgCol title="内盘盈亏" field="nativePnl" align="right" width="100" formatterjs="number2digits"></t:dgCol>
+			<!-- 总盈亏 -->
+			<t:dgCol title="总盈亏" field="pnl" align="right" width="100" formatterjs="number2digits"></t:dgCol>
+			<t:dgCol title="单吨盈亏" field="pnl4ton" align="right" width="100" formatterjs="number2digits"></t:dgCol>

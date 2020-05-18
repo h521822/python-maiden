@@ -1,0 +1,117 @@
+// 销售交付批次号
+execl.setExSellDeliveryFullLotNo1(StringUtil.nvl(rowMap.get("exSellDeliveryFullLotNo1"))); 
+// 采购交付批次号
+execl.setExBuyDeliveryFullLotNo(StringUtil.nvl(rowMap.get("exBuyDeliveryFullLotNo"))); 
+// 数量
+execl.setExSellDeliveryQuantity(StringUtil.nvl(rowMap.get("exSellDeliveryQuantity"))); 
+// 采购美元价格
+execl.setBuyUsPrice(StringUtil.nvl(rowMap.get("buyUsPrice"))); 
+// 购汇汇率
+execl.setExchangeRate(StringUtil.nvl(rowMap.get("exchangeRate"))); 
+// 采购人民币价格
+execl.setBuyCnPrice(StringUtil.nvl(rowMap.get("buyCnPrice"))); 
+// 采购不含税货款
+execl.setBuyPayment(StringUtil.nvl(rowMap.get("buyPayment"))); 
+// 销售价格
+execl.setSaleCnPrice(StringUtil.nvl(rowMap.get("saleCnPrice"))); 
+// 销售不含税货款
+execl.setSalePayment(StringUtil.nvl(rowMap.get("salePayment"))); 
+// 资金成本
+execl.setFundsCost(StringUtil.nvl(rowMap.get("fundsCost"))); 
+// 暂估费用
+execl.setEstimateFee(StringUtil.nvl(rowMap.get("estimateFee"))); 
+// 费用
+execl.setFee(StringUtil.nvl(rowMap.get("fee"))); 
+// 现货盈亏
+execl.setSpotPnl(StringUtil.nvl(rowMap.get("spotPnl"))); 
+// 外盘买入
+execl.setForeignBuyAmount(StringUtil.nvl(rowMap.get("foreignBuyAmount"))); 
+// 外盘卖出
+execl.setForeignSellAmount(StringUtil.nvl(rowMap.get("foreignSellAmount"))); 
+// 手续费
+execl.setNativeCharges(StringUtil.nvl(rowMap.get("nativeCharges"))); 
+// 外盘盈亏
+execl.setForeignPnl(StringUtil.nvl(rowMap.get("foreignPnl"))); 
+// 内盘买入
+execl.setNativeBuyAmount(StringUtil.nvl(rowMap.get("nativeBuyAmount"))); 
+// 内盘卖出
+execl.setNativeSellAmount(StringUtil.nvl(rowMap.get("nativeSellAmount"))); 
+// 内盘盈亏
+execl.setNativePnl(StringUtil.nvl(rowMap.get("nativePnl"))); 
+// 总盈亏
+execl.setPnl(StringUtil.nvl(rowMap.get("pnl"))); 
+// 单吨盈亏
+execl.setPnl4ton(StringUtil.nvl(rowMap.get("pnl4ton"))); 
+
+
+
+
+
+
+/** 销售交付批次号 */
+@Excel(name = "销售交付批次号")
+private String exSellDeliveryFullLotNo1;
+/** 采购交付批次号 */
+@Excel(name = "采购交付批次号")
+private String exBuyDeliveryFullLotNo;
+/** 数量 */
+@Excel(name = "数量")
+private String exSellDeliveryQuantity;
+/** 采购美元价格 */
+@Excel(name = "采购美元价格")
+private String buyUsPrice;
+/** 购汇汇率 */
+@Excel(name = "购汇汇率")
+private String exchangeRate;
+/** 采购人民币价格 */
+@Excel(name = "采购人民币价格")
+private String buyCnPrice;
+/** 采购不含税货款 */
+@Excel(name = "采购不含税货款")
+private String buyPayment;
+/** 销售价格 */
+@Excel(name = "销售价格")
+private String saleCnPrice;
+/** 销售不含税货款 */
+@Excel(name = "销售不含税货款")
+private String salePayment;
+/** 资金成本 */
+@Excel(name = "资金成本")
+private String fundsCost;
+/** 暂估费用 */
+@Excel(name = "暂估费用")
+private String estimateFee;
+/** 费用 */
+@Excel(name = "费用")
+private String fee;
+/** 现货盈亏 */
+@Excel(name = "现货盈亏")
+private String spotPnl;
+/** 外盘买入 */
+@Excel(name = "外盘买入")
+private String foreignBuyAmount;
+/** 外盘卖出 */
+@Excel(name = "外盘卖出")
+private String foreignSellAmount;
+/** 手续费 */
+@Excel(name = "手续费")
+private String nativeCharges;
+/** 外盘盈亏 */
+@Excel(name = "外盘盈亏")
+private String foreignPnl;
+/** 内盘买入 */
+@Excel(name = "内盘买入")
+private String nativeBuyAmount;
+/** 内盘卖出 */
+@Excel(name = "内盘卖出")
+private String nativeSellAmount;
+/** 内盘盈亏 */
+@Excel(name = "内盘盈亏")
+private String nativePnl;
+/** 总盈亏 */
+@Excel(name = "总盈亏")
+private String pnl;
+/** 单吨盈亏 */
+@Excel(name = "单吨盈亏")
+private String pnl4ton;
+ 
