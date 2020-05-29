@@ -107,12 +107,31 @@ if __name__ == "__main__":
 my_groups = bot.groups().search('机器人测试群')[0]
 @bot.register(chats=my_groups, except_self=False)
 def print_others(msg):
+    # my_friend = bot.friends().search('Alex')[0]
+
+    my_mp = bot.mps().search('小冰')[0]
+
     # 输出聊天内容
     # print(msg)
-    # print(msg.text)
-    print(msg.type)
-    if msg.type == "Picture":
-        print(msg.get_file('D:/text'))
-        # print(msg.get_file('D:/text/' + msg.file_name))
-        print(msg.file_name)
+    print(msg.text)
+
+    if msg.is_at:
+        msg.forward(my_mp)
+
+# embed()
+
+
+# 公众号
+my_mp = bot.mps().search('小冰')[0]
+@bot.register(chats=my_mp, except_self=False)
+def print_others(msg):
+    my_friend = bot.friends().search('Alex')[0]
+
+    # 输出聊天内容
+    # print(msg)
+    print(msg.text)
+    msg.forward(my_friend)
+
 embed()
+
+
