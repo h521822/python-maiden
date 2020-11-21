@@ -16,6 +16,7 @@ from email.header import Header
 import datetime
 import random
 
+
 def get_html(baseUrl):
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
     try:
@@ -31,22 +32,20 @@ def get_html(baseUrl):
         return None
 
 
-
 # 2、数据存储
 def save_data(dataInfo):
     # 1、打开txt文件     w:覆盖以前的内容；a:在最后追加
-    file_handle = open('data.txt', mode='w',encoding="utf-8")
+    file_handle = open('data.txt', mode='w', encoding="utf-8")
     # 2、向文件写入数据
     file_handle.write(dataInfo + ' \n')
     # 3、关闭文件
     file_handle.close()
     # pass
 
-    
 
 # 天天基金。更新快，并且有估值。但是数据量少
 def get_ttjj_data(code):
-    
+
     t = time.time()
     rt = int(round(t * 1000))
 
@@ -66,8 +65,8 @@ def get_ttjj_data(code):
     dwjz = jsonText['dwjz']     # 上个交易日的单位净值
     gsz = jsonText['gsz']       # 最近一个交易日的单位净值估值
     gszzl = jsonText['gszzl']   # 最近一个交易日的日涨跌幅
-    gztime = jsonText['gztime'][:10] # 最近一个交易日的日期
-  
+    gztime = jsonText['gztime'][:10]  # 最近一个交易日的日期
+
     # print(dataList[:1])
     hxDate = dataList[:1][0][0]
 
@@ -88,7 +87,6 @@ def get_ttjj_data(code):
         list.append(float(gsz))
         dataList.append(list)
     return name
-
 
 
 # 和讯。历史数据比较全，但是更新太慢
@@ -114,7 +112,6 @@ def get_hx_data(code):
         dataList.append(list)
 
 
-
 # 获取数据
 def get_data(code):
     if isNew:
@@ -125,13 +122,13 @@ def get_data(code):
         df = pd.DataFrame(dataList, index=indexList, columns=titleList).sort_index()
 
         # print(df)
-        df['name'] = name 
+        df['name'] = name
 
         # 保存数据
         df.to_csv(code + '.csv')
     else:
         # 读取数据
-        df = pd.read_csv(code + '.csv',index_col='date')
+        df = pd.read_csv(code + '.csv', index_col='date')
 
     msg_text = doData(df)
     return msg_text
@@ -152,7 +149,7 @@ def doData(df):
     # 数据2     数据1的20日均线
     df['s2'] = df['s1'].rolling(20).mean()
     # 数据3     数据2的平方根
-    df['s3'] = df['s2'] ** 0.5 
+    df['s3'] = df['s2'] ** 0.5
     # 上轨      中轨+2*数据3
     df['g2'] = df['g1'] + 2 * df['s3']
     # 下轨      中轨-2*数据3
@@ -169,9 +166,9 @@ def doData(df):
 
     # 去除缺失行
     df = df.dropna()
-    for i in range(1,len(df)):
+    for i in range(1, len(df)):
         # print(df[i:i+1])
-        
+
         # 当天
         d = df[i:i+1]
         # d = df.iloc[i]
@@ -186,34 +183,32 @@ def doData(df):
         if float(d1['unitNet']) > float(d1['g2']) and float(d['unitNet']) < float(d['g2']):
             # print(d.index)
             # d['ypck'] = "清仓"
-            df.loc[d.index,'ypck'] = "清仓"
+            df.loc[d.index, 'ypck'] = "清仓"
             # print(d['unitNet'])
         # IF(AND(E4>M4,E4<G4,[@单位净值2]<[@高位止盈线]),"止盈赎回"
         elif float(d1['unitNet']) > float(d1['gwvyx']) and float(d1['unitNet']) < float(d1['g2']) and float(d['unitNet']) < float(d['gwvyx']):
-            df.loc[d.index,'ypck'] = "止盈赎回"
+            df.loc[d.index, 'ypck'] = "止盈赎回"
         # IF([@单位净值2]>[@低位加仓线],"观望期",
         elif float(d['unitNet']) > float(d['dwjcx']):
-            df.loc[d.index,'ypck'] = "观望期"
+            df.loc[d.index, 'ypck'] = "观望期"
         # IF([@单位净值2]>[@下轨],"可加仓","探底加仓")
         elif float(d['unitNet']) > float(d['g3']):
-            df.loc[d.index,'ypck'] = "可加仓"
+            df.loc[d.index, 'ypck'] = "可加仓"
         else:
-            df.loc[d.index,'ypck'] = "探底加仓"
+            df.loc[d.index, 'ypck'] = "探底加仓"
 
-        if i > 30 :
+        if i > 30:
 
             # 计算CCI值
             # =(B2-SUM(H2:H31)/30)/AVEDEV(H2:H31)/0.015
             # 平均值：mean()        平均绝对偏差：mad()         苦恼mad()不能和rolling()一同使用
             ddf = df[i-29:i+1]
-            df.loc[d.index,'cci'] = (d['unitNet'] - ddf['ma5'].mean()) / ddf['ma5'].mad() / 0.015
-
+            df.loc[d.index, 'cci'] = (d['unitNet'] - ddf['ma5'].mean()) / ddf['ma5'].mad() / 0.015
 
     # print(df)
     # print(df.iloc[-1]['name'])
     # print(df.iloc[-1]['ypck'])
-    return df.iloc[-1]['name'] + '   ' + df.iloc[-1]['ypck'] + '   ' + str(round(df.iloc[-1]['cci'],2)) + '\n'
-
+    return df.iloc[-1]['name'] + '   ' + df.iloc[-1]['ypck'] + '   ' + str(round(df.iloc[-1]['cci'], 2)) + '\n'
 
 
 # 发送消息到邮箱
@@ -225,7 +220,7 @@ def send_sms(msg_text):
     mail_pass = "ZTHDVBGWWTIGJJEW"  # 口令（是授权码，不是登录密码）
 
     sender = 'he521822@126.com'     # 发送人邮箱，必须与 mail_user 一致
-    receivers = ['h521822@126.com','1665521822@qq.com']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
+    receivers = ['h521822@126.com', '1665521822@qq.com']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
     subject = '大吉大利晚上吃鸡'    # 标题
     msg_from = 'hej<h22@126.com>'   # 发件人(Tim为发送人名称，可以为空；<>为发送人邮箱，可以为空，可任意伪装)
     msg_to = 'h521822@126.com,1665521822@qq.com'   # 收件人，必须与 receivers 一致
@@ -248,10 +243,6 @@ def send_sms(msg_text):
         print("Error: 无法发送邮件")
 
 
-
-    
-
-
 if __name__ == "__main__":
     os.chdir(os.path.abspath(os.path.dirname(__file__)))
 
@@ -260,28 +251,32 @@ if __name__ == "__main__":
 
     # 表头（日期、单位净值、日增长率）
     # titleList = ['date','unitNet','growth']
-    titleList = ['date','unitNet']
+    titleList = ['date', 'unitNet']
 
     # 基金编号
-    codeList = ['001548','000961','000962',         # 50/300/500
-    '000071',       # 恒生
+    codeList = [
+        '001508', '000727',     # 动力灵活、健康灵活
+        '000294',       # 生态优先
 
-    '001508', '000727', '000751',     # 动力灵活、健康灵活、嘉实新兴产业
+        # '001548','000961','000962',         # 50/300/500
+        '000071',       # 恒生
 
-    '161721',       # 招商地产      （不打算持有了）
+        # '000751',     、嘉实新兴产业
 
-    '001631',       # 食品饮料
-    '161725',       # 白酒
-    '320007',       # 科技
-    '001618',       # 电子
-    '004070',       # 证券
-    '001595',       # 银行
-                
-    '166002',       # 中欧蓝筹
-    '163402',       # 兴全趋势
-    '519697',       # 交银优势
-                
-    '005224']       # 基建工程
+        # '161721',       # 招商地产      （不打算持有了）
+
+        # '001631',       # 食品饮料
+        # '161725',       # 白酒
+        # '320007',       # 科技
+        '001618',       # 电子
+        '004070',       # 证券
+        '001595',       # 银行
+
+        # '166002',       # 中欧蓝筹
+        # '163402',       # 兴全趋势
+        # '519697',       # 交银优势
+
+        '005224']       # 基建工程
     # codeList = ['005827','163402','270002','166002','260108','161005']
     # codeList = ['005224']
     msg_text = ''
@@ -289,13 +284,13 @@ if __name__ == "__main__":
     for code in codeList:
         print("{}数据处理开始".format(code))
         # print(stop)
-            # 数据
+        # 数据
         dataList = []
         # index列
         indexList = []
         msg_text += get_data(code)
         print("{}数据处理完成".format(code))
+    print(msg_text)
+    # send_sms(msg_text)
 
-    send_sms(msg_text)
-    
     print("数据处理完成")
