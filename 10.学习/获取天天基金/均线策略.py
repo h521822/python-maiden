@@ -8,7 +8,7 @@ from requests import get
 import json
 import pandas as pd
 import matplotlib.pyplot as plt
-plt.style.use('bmh') 
+plt.style.use('bmh')
 
 
 # user_agent列表
@@ -50,7 +50,6 @@ if __name__ == "__main__":
     starttime = datetime.datetime.now()
     print(starttime)
 
-
     t = time.time()
     rt = int(round(t * 1000))
     code = "004070"
@@ -62,8 +61,8 @@ if __name__ == "__main__":
 
     infosList = []
     indexList = []
-    titleList = ['FSRQ','DWJZ','LJJZ','JZZZL']
-    
+    titleList = ['FSRQ', 'DWJZ', 'LJJZ', 'JZZZL']
+
     for info in infos:
         # print(info)
         FSRQ = info['FSRQ']     # 日期
@@ -92,14 +91,11 @@ if __name__ == "__main__":
     df = df.dropna()
     # print(df)
 
-    df[['FSRQ','LJJZ','ma']].plot()
+    df[['FSRQ', 'LJJZ', 'ma']].plot()
 
     plt.show()
 
     endtime = datetime.datetime.now()
     print(endtime)
 
-    print('\n数据处理成功!所用时间为：' +  str((endtime - starttime).seconds))
-
-
-
+    print('\n数据处理成功!所用时间为：' + str((endtime - starttime).seconds))
